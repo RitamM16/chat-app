@@ -2,7 +2,7 @@
 
 A simple chat app made in react and that uses express, socket.io, endcrypt and peer.js for providing video calling service and End-to-End encrypted chat facility. 
 
-DISCLAMER: The webapp only works in desktop environment and does not guarantee quality experience on smart phone.
+DISCLAIMER: The webapp only works in desktop environment and does not guarantee quality experience on smart phone.
 
 To setup the app follow the provided steps below.
 
