@@ -21,8 +21,6 @@ export const video = (socket: Socket) => {
      * Video peer id reply forwarder
      */
     socket.on("send-video-peerid", data => {
-
-        console.log("send-video-peerid")
         
         const partnerSocketId = getSocketIdFromUser(data.to);
 

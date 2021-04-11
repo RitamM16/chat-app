@@ -1,24 +1,23 @@
-# install npm packages of the server
-if(!(Test-Path "./node_modules")){
-    npm "install"
-}
+# install npm packages for the server
+Write-Output "Installing server npm packages..."
+npm "install"
 
 # Compile TypeScript files
-if(!(Test-Path "./dist")){
-    tsc
-}
+Write-Output "Compining typeScript files..."
+tsc
 
 # init database and prisma client
 if(!(Test-Path "./prisma/database")){
-    npx "prisma migrate dev --name init"
+    Write-Output "Creating database and Prisma Client..."
+    npx prisma migrate dev --name init
 }
 
-# install npm packages of the client
-if(!(Test-Path "./web/node_modules")){
-    npm "install --prefix web"
-}
+# install npm packages for the client
+Write-Output "Installing Web app npm packages..."
+Push-Location "./web"
+npm install
+Pop-Location
 
 # build the client
-if(!(Test-Path "./web/build")){
-    npm "run build --prefix web"
-}
+Write-Output "Building web app..."
+npm run "build:web-app"

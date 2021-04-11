@@ -46,8 +46,6 @@ export const sendUserDetailsToAllUsers = async (socket: Socket) => {
         }, where: { id: socket.handshake.auth.token }
     })
 
-    console.log("emited to all sockets")
-
     if(user) socket.broadcast.emit("new-user-online", user)
     
 }
@@ -83,7 +81,6 @@ export const getAllUsers = async () => {
 }
 
 export function rootSocketRoute(socket: Socket) {
-    console.log("Connected to socket server")
 
     socket.emit("connected");
 

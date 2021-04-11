@@ -52,10 +52,10 @@ app.get('*', (req,res) =>{
     res.sendFile(path.join(BUILD_DIR,"index.html"));
 });
 
-//Peer server 
-peerServer.on("connection", (peer) => {
-    console.log("Peer connected with id:", peer.getId());
-})
+// //Peer server 
+// peerServer.on("connection", (peer) => {
+//     console.log("Peer connected with id:", peer.getId());
+// })
 
 
 //Setting up Listener
