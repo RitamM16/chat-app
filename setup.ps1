@@ -4,7 +4,7 @@ npm "install"
 
 # Compile TypeScript files
 Write-Output "Compining typeScript files..."
-tsc
+npm run "build"
 
 # init database and prisma client
 if(!(Test-Path "./prisma/database")){
