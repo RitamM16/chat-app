@@ -1,5 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 export const prisma = new PrismaClient();
 
@@ -31,10 +32,12 @@ export async function signup(req: express.Request, res: express.Response) {
 
         //If already registered, throw error
         if(user) throw Error("Account with email already exists")
+
+        const hashedPassword = await bcrypt.hash(password, 8);
  
         //Creat new user
         user = await prisma.user.create({
-            data: {email, name, password}
+            data: {email, name, password: hashedPassword}
         })
 
         responseObject.data = {auth: {email: user.email, name: user.name, id: user.id}}
@@ -66,8 +69,10 @@ export async function login(req: express.Request, res: express.Response) {
         //If user not found
         if(!user) throw Error("Account does not exist with given email");
 
+        const isPasswordCorrect = bcrypt.compare(password,user.password);
+
         //Check password
-        if(password !== user.password) throw new Error("Wrong Password");
+        if(!isPasswordCorrect) throw new Error("Wrong Password");
 
         responseObject.data = {auth: {email: user.email, name: user.name, id: user.id}}
 
